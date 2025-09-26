@@ -1,26 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* Shadcn/UI colors - Light Theme */
+  --color-background: #ffffff;
+  --color-foreground: #2d3748; /* Dark Text */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-card: #ffffff;
+  --color-card-foreground: #2d3748;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #2d3748;
+
+  --color-primary: #2d3748; /* Dark Text for buttons */
+  --color-primary-foreground: #fafafa; /* White for button text */
+
+  --color-secondary: #e2e8f0; /* Light Gray */
+  --color-secondary-foreground: #2d3748;
+
+  --color-muted: #fdf5e6; /* Light Cream */
+  --color-muted-foreground: #4a5568; /* Medium Gray */
+
+  --color-accent: #b8d4f8; /* Primary Blue */
+  --color-accent-foreground: #2d3748;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+
+  --color-border: #e2e8f0; /* Light Gray */
+  --color-input: #e2e8f0; /* Light Gray */
+  --color-ring: #b8d4f8; /* Primary Blue */
+
+  --color-chart-1: #e67e22;
+  --color-chart-2: #2d8659;
+  --color-chart-3: #1e3a5f;
+  --color-chart-4: #f1c40f;
+  --color-chart-5: #e74c3c;
+
+  /* Custom Deel Colors */
+  --color-primary-blue: #b8d4f8;
+  --color-white: #ffffff;
+  --color-light-cream: #fdf5e6;
+  --color-yellow-accent: #ffd700;
+  --color-dark-text: #2d3748;
+  --color-medium-gray: #4a5568;
+  --color-light-gray: #e2e8f0;
+  --color-success-green: #48bb78;
+  --color-warning-orange: #ed8936;
+  --color-purple-accent: #9f7aea;
+  --color-dark-background: #1a1a1a; /* Used in compliance and footer sections */
+  --color-dark-foreground: #f0f0f0; /* Light text on dark backgrounds */
+
+  /* Typography */
+  --font-display: "Inter", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+
+  /* Shadcn/UI Radii */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-md: calc(0.75rem - 2px); /* 10px */
+  --radius-sm: 0.5rem; /* 8px */
+
+  /* Shadcn/UI Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border);
+  }
+}
+
+@layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --popover: var(--color-popover);
+    --popover-foreground: var(--color-popover-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-secondary-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-foreground);
+    --border: var(--color-border);
+    --input: var(--color-input);
+    --ring: var(--color-ring);
+    --chart-1: var(--color-chart-1);
+    --chart-2: var(--color-chart-2);
+    --chart-3: var(--color-chart-3);
+    --chart-4: var(--color-chart-4);
+    --chart-5: var(--color-chart-5);
+    --radius: var(--radius-lg);
+  }
+
+  /* Base styles for HTML elements */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    color: var(--color-dark-text);
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 3.5rem; /* 56px */
+    font-weight: 700; /* Bold */
+  }
+
+  h2 {
+    font-size: 2.5rem; /* 40px */
+    font-weight: 600; /* Semi-bold */
+  }
+
+  h3 {
+    font-size: 1.75rem; /* 28px */
+    font-weight: 500; /* Medium */
+  }
+
+  h4 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 500; /* Medium */
+  }
+
+  p {
+    font-size: 1.125rem; /* 18px */
+    font-weight: 400; /* Regular */
+    color: var(--color-medium-gray);
+  }
+
+  a {
+    color: var(--color-primary-blue);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  button {
+    font-family: var(--font-body);
+    font-size: 1rem; /* 16px */
+    font-weight: 500; /* Medium */
+    border-radius: var(--radius-sm); /* 8px */
+    padding: 1rem 2rem; /* 16px vertical, 32px horizontal */
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem; /* 24px */
+    padding-right: 1.5rem; /* 24px */
+  }
+
+  .text-caption {
+    font-size: 0.875rem; /* 14px */
+    font-weight: 400; /* Regular */
+    color: var(--color-medium-gray);
+  }
+
+  .text-small {
+    font-size: 0.75rem; /* 12px */
+    font-weight: 400; /* Regular */
+    color: var(--color-medium-gray);
+  }
+}
+
+/* Hide Next.js error overlay portal */
+nextjs-portal {
+  display: none !important;
 }
